@@ -1,0 +1,33 @@
+[package]
+name = "tinytracker"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[lib]
+name = "tinytracker"
+crate-type = ["lib"]
+
+[[bin]]
+name = "tracker"
+path = "src/tracker.rs"
+required-features = ["bin"]
+
+[dependencies]
+anyhow = "1.0.86"
+env_logger = { version = "0.11.3", optional = true }
+log = "0.4.21"
+tokio = { version = "1.38.0", features = ["macros", "rt-multi-thread", "net"] }
+tokio-stream = "0.1.15"
+tokio-util = { version = "0.7.11", features = ["net", "codec"] }
+clap = { version = "4", optional = true, features = ["derive", "env"] }
+rand = { version = "0.8" , optional = true}
+binrw = { version = "0.14.0"}
+futures = { version = "0.3.30", optional = true }
+bytes = "1.6.0"
+
+[dev-dependencies]
+rand = "0.8"
+
+[features]
+bin = ["env_logger", "tokio/signal", "clap", "rand", "futures"]
